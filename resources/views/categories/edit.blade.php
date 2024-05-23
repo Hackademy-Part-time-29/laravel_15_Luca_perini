@@ -1,0 +1,35 @@
+<x-layout>
+    <div class="add-container">
+        <h1>Edit Category:</h1>
+        @if(session()->has('success'))
+        <div class="success-message" role="alert">
+            {{session('success')}}
+        </div>
+        @endif
+        <form method="post" action="{{route('categories.update',$category)}}" class="article-form" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value={{old('title',$category->title)}}>
+                @error('title')
+                <div class="fail-message">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description">{{old('description',$category->description)}}</textarea>
+                @error('description')
+                <div class="fail-message">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+    
+            <button type="submit" class="btn-create">Edit Category</button>
+        </form>
+    </div>
+</div>
+</x-layout>
